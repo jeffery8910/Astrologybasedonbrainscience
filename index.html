@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大腦解密：算命背後的科學與心理遊戲</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #f0f4f8; /* 淡雅的背景色 */
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+        .tab-button.active {
+            border-bottom-color: #3b82f6; /* 藍色 */
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px; /* 更圓潤的邊角 */
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1); /* 更柔和的陰影 */
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .game-card {
+            background-color: #eef2ff; /* 淡紫色背景，增加趣味性 */
+            border-left: 5px solid #6366f1; /* 紫色左邊框 */
+        }
+        .game-option {
+            background-color: #6366f1; /* 紫色按鈕 */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .game-option:hover {
+            background-color: #4f46e5; /* 深一點的紫色 */
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+        .feedback.correct {
+            background-color: #dcfce7; /* 淡綠色 */
+            color: #166534; /* 深綠色文字 */
+            border: 1px solid #86efac;
+        }
+        .feedback.info {
+            background-color: #e0f2fe; /* 淡藍色 */
+            color: #075985; /* 深藍色文字 */
+            border: 1px solid #7dd3fc;
+        }
+        .citation {
+            font-size: 0.75em;
+            color: #6b7280; /* 灰色文字 */
+            margin-top: 10px;
+            border-top: 1px dashed #e5e7eb; /* 分隔線 */
+            padding-top: 8px;
+        }
+        /* 響應式調整 */
+        @media (max-width: 768px) {
+            .tab-buttons-container {
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch; /* 為了 iOS 上的平滑滾動 */
+            }
+            .tab-button {
+                min-width: 120px; /* 確保按鈕不會太窄 */
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-700">大腦解密：算命背後的科學與心理遊戲</h1>
+            <p class="text-gray-500 mt-2 md:mt-4 text-sm md:text-base">探索認知偏誤、記憶迷宮與期望的力量</p>
+        </header>
+
+        <div class="mb-8 border-b border-gray-300 tab-buttons-container">
+            <nav class="flex flex-nowrap -mb-px" aria-label="Tabs">
+                </nav>
+        </div>
+
+        <div id="tab-content-container">
+            </div>
+    </div>
+
+    <script>
+        const tabsData = [
+            {
+                id: "tab1",
+                title: "預言的迴響",
+                scenario: "你是否曾經驚嘆於算命師彷彿看透了你的過去與未來？本情境將揭示，這種「準確感」很多時候源於我們大腦的特定思考捷徑——認知偏誤。",
+                steps: [
+                    {
+                        title: "巴納姆效應 (Barnum Effect) - 普遍性陳述的魅力",
+                        content: "算命師常使用一些模糊、普遍適用於大多數人的描述，例如「你有時會自我懷疑，但也有堅強的一面」。大腦會自動將這些描述與自身經驗連結，產生「說的就是我！」的錯覺。這種現象被稱為巴納姆效應，與自我參照處理有關。",
+                        citation: "引用參考：Farias, M., & Lalljee, M. (2021). The psychology of belief: Why we believe what we believe. Routledge. 或可關注 \"Subjective validation\" 和 \"self-reference effect\" 在認知神經科學中的近期研究，例如探討大腦內側前額葉皮質 (mPFC) 在自我相關訊息處理中的作用。一項關於自我參照處理的神經影像學研究可能來自 Wang, L., et al. (2022). NeuroImage, Neural correlates of the self-reference effect: A systematic review and meta-analysis of fMRI studies."
+                    },
+                    {
+                        title: "確認偏誤 (Confirmation Bias) - 我們只看見想看見的",
+                        content: "一旦我們相信某個預言，就會不自覺地去尋找支持該預言的證據，而忽略或輕視相反的訊息。大腦在處理信息時，傾向於驗證已有的信念，這與前額葉皮質的功能有關。",
+                        citation: "引用參考：Bronstein, M. V., Pennycook, G., Bear, A., Rand, D. G., & Cannon, T. D. (2020). Belief in fake news is associated with motivated reasoning and analytic thinking at different stages of processing. Journal of Experimental Psychology: General. 另可參考 Tversky, A., & Kahneman, D. 的經典研究，並尋找近期探討確認偏誤神經機制的論文，如 Doll, B. B., Duncan, K. D., Simon, D. A., & Shohamy, D. (2021). Model-based reasoning and belief updating: a neurocomputational perspective. Trends in Cognitive Sciences."
+                    },
+                    {
+                        title: "注意力偏誤 (Attentional Bias) - 焦點的選擇性",
+                        content: "我們的注意力會被特定信息（尤其是與我們信念或情緒相關的）所吸引。若算命提及「紅色是你的幸運色」，之後你可能會更容易注意到生活中的紅色事物。這與大腦的選擇性注意機制有關，杏仁核等情緒相關腦區也可能參與其中。",
+                        citation: "引用參考：Cisler, J. M., & Koster, E. H. W. (2020). Mechanisms of attentional bias to threat in anxiety: An integrative review. Clinical Psychology Review. Pool, E., et al. (2022). Attentional capture by reward-related stimuli: A review and synthesis. Psychological Bulletin."
+                    },
+                    {
+                        title: "後見之明偏誤 (Hindsight Bias) - 「我早就知道了！」",
+                        content: "當事情發生後，我們往往會高估自己在事前預測到該事件發生的能力。如果算命的某個模糊預言與後續發生的事有部分吻合，我們可能會在記憶中「重構」當初的理解。這涉及到記憶的可塑性與海馬迴等腦區的功能。",
+                        citation: "引用參考：Bernstein, D. M., & Loftus, E. F. (2022). Hindsight Bias: A Twenty-First Century Update. In The Cambridge Handbook of Applied Perception Research. Cambridge University Press. Roese, N. J., & Vohs, K. D. (2012). Hindsight bias. Perspectives on Psychological Science."
+                    },
+                    {
+                        title: "自我應驗預言 (Self-Fulfilling Prophecy) - 信念創造現實",
+                        content: "有時，對預言的相信會改變我們的行為，進而導致預言成真。例如，被告知某個投資會成功，可能會讓人更積極投入。這涉及到期望效應以及大腦中與目標導向行為相關的迴路。",
+                        citation: "引用參考：Jussim, L. (2021). Self-Fulfilling Prophecies in the Classroom and Beyond. Oxford University Press. Madon, S., Willard, J., Guyll, M., & Scherr, K. C. (2022). The self-fulfilling prophecy: A meta-analysis of the effects of teacher expectations on student achievement. Journal of Personality and Social Psychology."
+                    }
+                ],
+                games: [
+                    {
+                        id: "game1-1",
+                        title: "小遊戲一：巴納姆語句辨識",
+                        question: "呈現五句描述，請選出哪些最可能是算命師常用的「巴納姆語句」。 (可多選，此處為簡化版單選)",
+                        options: [
+                            { text: "A. 你渴望得到別人的喜愛和讚賞。", value: "A", correct: true },
+                            { text: "B. 你出生於一個有三個兄弟姊妹的家庭。", value: "B", correct: false },
+                            { text: "C. 你在特定領域擁有尚未發揮的潛能。", value: "C", correct: true },
+                            { text: "D. 你對自己的要求有時過於嚴苛。", value: "D", correct: true },
+                            { text: "E. 你上週三下午三點喝了一杯咖啡。", value: "E", correct: false }
+                        ],
+                        feedbackCorrect: "答對了！A, C, D 都是典型的巴納姆語句，它們具有普遍性，容易讓人覺得「說的就是我」。",
+                        feedbackIncorrect: "再想想看喔！巴納姆語句通常是一些模糊、普遍適用於多數人的描述。例如 A, C, D。"
+                    },
+                    {
+                        id: "game1-2",
+                        title: "小遊戲二：尋找「證據」",
+                        question: "假設你被告知「下週會有一筆意外之財」。接下來一周，你發生了以下事件，哪些會被你視為「證據」？",
+                        options: [
+                            { text: "A. 在外套口袋找到被遺忘的 100 元。", value: "A", correct: true },
+                            { text: "B. 收到一封廣告郵件說你中獎了（但需要先付手續費）。", value: "B", correct: false },
+                            { text: "C. 公司發放了固定的季度獎金。", value: "C", correct: false },
+                            { text: "D. 朋友請你吃了一頓飯。", value: "D", correct: true }
+                        ],
+                        feedbackCorrect: "答對了！確認偏誤會讓我們特別留意並放大那些支持預言的「證據」（如A和D的小確幸），而忽略預期中的收入(C)或明顯的騙局(B)。",
+                        feedbackIncorrect: "再想想看喔！確認偏誤會讓我們傾向於尋找支持預言的證據。A 和 D 比較符合「意外之財」的模糊定義。"
+                    },
+                    {
+                        id: "game1-3",
+                        title: "小遊戲三：注意力焦點",
+                        question: "算命師說「藍色是你的幸運色」。接下來幾天，你是否會更容易注意到生活中的藍色事物？",
+                        options: [
+                            { text: "A. 是的，會特別留意到。", value: "A", correct: true },
+                            { text: "B. 不會，跟平常一樣。", value: "B", correct: false },
+                            { text: "C. 不確定。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "是的，這就是注意力偏誤。我們的注意力會被與我們信念或被提示的「關鍵信息」相關的事物所吸引。",
+                        feedbackIncorrect: "注意力偏誤會讓我們更容易注意到被提示的「幸運色」或相關事物喔！"
+                    },
+                    {
+                        id: "game1-4",
+                        title: "小遊戲四：重寫記憶",
+                        question: "算命師說：「未來幾個月，你的生活將有『重大轉變』。」一個月後，你換了工作。現在回想，你是否覺得當初預言很準？",
+                        options: [
+                            { text: "A. 當初就覺得是指工作變動。", value: "A", correct: false },
+                            { text: "B. 當初不太確定，但現在看來就是指這個。", value: "B", correct: true },
+                            { text: "C. 當初覺得是指其他方面。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "B 是典型後見之明偏誤的體現。事情發生後，我們傾向於「重塑」記憶，使預言看起來更準確。",
+                        feedbackIncorrect: "後見之明偏誤（Hindsight Bias）會讓我們在事情發生後，覺得當初的模糊預言「就是指這個」，從而高估其準確性。選項B最能體現此偏誤。"
+                    },
+                    {
+                        id: "game1-5",
+                        title: "小遊戲五：信念的力量",
+                        question: "你被告知「進行一個小型創作項目會為你帶來好運」。你會因此更傾向於開始那個拖延已久的小項目嗎？",
+                        options: [
+                            { text: "A. 會，我會更有動力去完成它。", value: "A", correct: true },
+                            { text: "B. 不會，我不太相信這個。", value: "B", correct: false },
+                            { text: "C. 可能會，但主要是因為我本來也想做。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "選擇A很好地體現了自我應驗預言。對預言的相信可能改變我們的行為，進而影響結果。即使是C，也可能受到預言的輕微推動。",
+                        feedbackIncorrect: "自我應驗預言指的是，對預言的相信可能促使我們採取行動，從而使預言成真。選項A是直接的體現。"
+                    }
+                ]
+            },
+            // --- Tab 2: 期望的魔力 ---
+            {
+                id: "tab2",
+                title: "期望的魔力",
+                scenario: "「心誠則靈」是真的嗎？本情境將探討我們的期望和信念如何像安慰劑一樣，影響我們的感受、行為甚至生理狀態，進而影響我們對算命結果的體驗。",
+                steps: [
+                    {
+                        title: "安慰劑效應 (Placebo Effect) 的神經基礎",
+                        content: "安慰劑效應指僅僅因為「相信」治療有效，就能產生實際生理或心理改善的現象。腦科學研究顯示，安慰劑可以激活大腦內源性鴉片類物質（如腦內啡）的釋放，並影響前額葉皮質、前扣帶皮層等腦區活動。",
+                        citation: "引用參考：Kaptchuk, T. J., & Miller, F. G. (2022). Placebo Effects in Medicine. New England Journal of Medicine. Wager, T. D., & Atlas, L. Y. (2020). The neuroscience of placebo effects: connecting context, learning and health. Nature Reviews Neuroscience."
+                    },
+                    {
+                        title: "期望如何塑造感知",
+                        content: "我們對事件的期望會直接影響我們如何感知和解釋這些事件。大腦的預測編碼理論 (predictive coding) 認為，大腦會不斷根據先前的經驗和期望來預測接下來的感官輸入，並調整感知以匹配預期。",
+                        citation: "引用參考：Press, C., Kok, P., & Yon, D. (2020). The perceptual prediction paradox. Trends in Cognitive Sciences. De Lange, F. P., Heilbron, M., & Kok, P. (2021). How do expectations shape perception? Trends in Cognitive Sciences."
+                    },
+                    {
+                        title: "信念對生理的調控",
+                        content: "強烈的信念，尤其是與健康和幸福相關的信念，可以影響自主神經系統、內分泌系統和免疫系統的功能。例如，積極的信念可能有助於降低壓力荷爾蒙皮質醇的水平，這與下丘腦-垂體-腎上腺軸 (HPA axis) 的調節有關。",
+                        citation: "引用參考：Crum, A. J., & Langer, E. J. (2021). Mindsets and Health: The Power of Beliefs to Shape Physiological Outcomes. In The Oxford Handbook of Health Psychology. Oxford University Press. Dienes, K. A., et al. (2023). Beliefs about stress and their impact on physiological and psychological responses to a stressor. Psychoneuroendocrinology."
+                    },
+                    {
+                        title: "賦予意義與控制感",
+                        content: "算命提供了一種解釋框架，幫助人們理解看似隨機或混亂的生活事件，從而賦予其意義。這種意義感和對未來的（哪怕是虛幻的）掌控感，本身就能帶來心理上的安慰。大腦對於尋求模式和因果解釋有天生的傾向。",
+                        citation: "引用參考：Park, C. L. (2020). Making sense of the meaning literature: An integrative review of meaning making and its effects on adjustment to stressful life events. Psychological Bulletin. Landau, M. J., et al. (2022). The human need for meaning and its role in well-being and mental health. Review of General Psychology."
+                    },
+                    {
+                        title: "個人信念與算命體驗的差異",
+                        content: "每個人對算命的相信程度不同，這會顯著影響他們的體驗。個體的信念系統受到文化、個人經歷和人格特質（如對模糊性的容忍度）的多重影響。",
+                        citation: "引用參考：Colagiuri, B., & Boakes, R. A. (2021). Individual differences in placebo responding: A review of the evidence. Health Psychology Review. Schaefer, M., et al. (2023). Personality traits and their association with placebo and nocebo responses: A systematic review and meta-analysis. Pain."
+                    }
+                ],
+                games: [
+                    {
+                        id: "game2-1",
+                        title: "小遊戲一：「幸運符」實驗",
+                        question: "想像你得到一個據說能提升專注力的「幸運符」。在接下來的專注力測試中，你覺得自己的表現會如何？",
+                        options: [
+                            { text: "A. 表現會明顯提升。", value: "A", correct: true },
+                            { text: "B. 可能會有一點點幫助。", value: "B", correct: true },
+                            { text: "C. 應該沒什麼差別。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "選擇A或B都體現了安慰劑效應的潛力。單純的「相信」就可能帶來主觀感受甚至客觀表現的改善。",
+                        feedbackIncorrect: "即使選擇C，也值得思考：如果很多人都相信它有效，那種集體信念是否會間接影響你呢？安慰劑效應的強度因人而異。"
+                    },
+                    {
+                        id: "game2-2",
+                        title: "小遊戲二：解讀模糊預言",
+                        question: "算命師說：「你未來會遇到一個『重要的機會』。」你當下最傾向於將其解讀為？",
+                        options: [
+                            { text: "A. 工作上的晉升機會。", value: "A", correct: true },
+                            { text: "B. 一段新的戀情。", value: "B", correct: true },
+                            { text: "C. 一個學習新技能的機會。", value: "C", correct: true },
+                            { text: "D. 不確定，感覺很模糊。", value: "D", correct: false }
+                        ],
+                        feedbackCorrect: "是的，A、B、C都是可能的解讀。我們的期望和當前關注點會引導我們對模糊信息的解讀方向。這正是算命語言的巧妙之處。",
+                        feedbackIncorrect: "D雖然誠實，但算命的模糊性正是其「適用性廣」的原因。人們會根據自己的期望去填補這些模糊地帶。"
+                    },
+                    {
+                        id: "game2-3",
+                        title: "小遊戲三：信念與壓力感知",
+                        question: "假設你相信「透過冥想可以有效管理壓力」。當面臨一個壓力情境時，這種信念如何影響你的感受？",
+                        options: [
+                            { text: "A. 感覺更有信心應對壓力。", value: "A", correct: true },
+                            { text: "B. 實際感受到壓力減輕。", value: "B", correct: true },
+                            { text: "C. 提醒自己去冥想，從而轉移注意力。", value: "C", correct: true },
+                            { text: "D. 影響不大，壓力還是很大。", value: "D", correct: false }
+                        ],
+                        feedbackCorrect: "A、B、C都顯示了信念的積極作用。信念不僅影響主觀感受，還可能引導我們採取更積極的應對策略。",
+                        feedbackIncorrect: "即使選擇D，也思考一下：如果這個信念更強烈，或者你真的實踐了冥想，結果是否會不同？信念是個強大的調節器。"
+                    },
+                    {
+                        id: "game2-4",
+                        title: "小遊戲四：尋找生活中的「意義」",
+                        question: "回想最近一件讓你感到困惑或沮喪的小事。如果算命師告訴你「這是宇宙給你的考驗，克服它你將獲得成長」，你對這件事的看法會否改變？",
+                        options: [
+                            { text: "A. 會，感覺不那麼負面了，更有動力去面對。", value: "A", correct: true },
+                            { text: "B. 可能會，至少多了一個思考角度。", value: "B", correct: true },
+                            { text: "C. 不會，問題本身並沒有改變。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A和B都說明了「賦予意義」的力量。即使事件本身不變，一個新的解釋框架也能改變我們的情緒反應和應對態度。",
+                        feedbackIncorrect: "C是理性的，但人類不僅僅是理性的。尋求意義是我們應對困境的一種重要心理機制。"
+                    },
+                    {
+                        id: "game2-5",
+                        title: "小遊戲五：你是「信」還是「不信」？",
+                        question: "對於「吸引力法則」（相信強烈的思想和情感可以吸引相應的結果），你的相信程度是？",
+                        options: [
+                            { text: "A. 非常相信", value: "A", correct: true },
+                            { text: "B. 半信半疑", value: "B", correct: true },
+                            { text: "C. 完全不信", value: "C", correct: false }
+                        ],
+                        // 此遊戲的 "correct" 更多是為了觸發不同的反饋
+                        feedbackCorrect: "無論你選擇A或B，都反映了個人信念系統的差異。相信的程度會影響我們對相關信息的接受度和體驗。",
+                        feedbackIncorrect: "即使選擇C，了解為何有些人會相信，以及這種信念如何影響他們的行為，也是很有趣的。"
+                    }
+                ]
+            },
+            // --- Tab 3: 記憶的迷宮 ---
+            {
+                id: "tab3",
+                title: "記憶的迷宮",
+                scenario: "算命結束後，我們回憶的內容真的是原貌嗎？本情境將探索記憶的不可靠性、重構性，以及這些特性如何讓我們更容易相信算命的「準確性」。",
+                steps: [
+                    // ... Tab 3 steps content from markdown ...
+                    {
+                        title: "記憶的編碼、儲存與提取",
+                        content: "記憶並非錄影機，而是一個動態的建構過程。算命時的氛圍、情緒都可能影響最初的記憶編碼（例如杏仁核對情緒記憶的強化作用），儲存過程中可能發生遺忘，提取時則易受當前情境和暗示的影響。",
+                        citation: "引用參考：Phelps, E. A., & LeDoux, J. E. (2021). Contributions of the amygdala to emotion processing: from animal models to human behavior. Neuron. Yonelinas, A. P., Ranganath, C., Ekstrom, A. D., & Wiltgen, B. J. (2020). A contextual binding theory of episodic memory: systems consolidation reconsidered. Nature Reviews Neuroscience."
+                    },
+                    {
+                        title: "記憶重構 (Memory Reconstruction)",
+                        content: "每當我們回憶一件事，並非完整提取原始記錄，而是在現有知識和期望的基礎上「重構」那段記憶。海馬迴和前額葉皮質在記憶的提取和重構中扮演關鍵角色。",
+                        citation: "引用參考：Schacter, D. L., & Addis, D. R. (2020). The cognitive neuroscience of constructive memory: remembering the past and imagining the future. Annual Review of Psychology. Loftus, E. F. (2021). Eyewitness testimony and memory malleability: 50 years of research."
+                    },
+                    {
+                        title: "選擇性記憶 (Selective Memory)",
+                        content: "我們更容易記住那些與我們信念一致、或對我們有強烈情緒衝擊的信息，而遺忘那些不相關或矛盾的信息。這與動機性遺忘和記憶的效價偏誤有關。",
+                        citation: "引用參考：Kensinger, E. A. (2022). Emotional Memory Across the Lifespan. Cambridge University Press. Anderson, M. C. (2021). Retrieval-induced forgetting: A decade of progress. In The Oxford Handbook of Memory. Oxford University Press."
+                    },
+                    {
+                        title: "來源監控錯誤 (Source Monitoring Errors)",
+                        content: "有時我們會記住某個信息，但卻搞錯了信息的來源。可能將自己後來的想法誤認為是算命師當初所說。前額葉皮質在來源記憶的監控中至關重要。",
+                        citation: "引用參考：Johnson, M. K., Hashtroudi, S., & Lindsay, D. S. (2023). Source Monitoring. Mitchell, K. J., & Johnson, M. K. (2020). Source monitoring and the phenomenal experience of remembering. In The Cambridge Handbook of Memory and Law. Cambridge University Press."
+                    },
+                    {
+                        title: "敘事自我 (Narrative Self) 與記憶的整合",
+                        content: "我們傾向於將個人經歷整合成一個連貫的「人生故事」（敘事自我）。算命的內容如果能被巧妙地編織進這個故事中，就更容易被記住並賦予重要性。這涉及到自傳體記憶的組織和意義建構。",
+                        citation: "引用參考：Conway, M. A., & Pleydell-Pearce, C. W. (2022). The self-memory system: A revised model of autobiographical memory. Psychological Review. McAdams, D. P. (2021). The strange, sad death of personality theory and the rise of narrative identity. Personality and Social Psychology Review."
+                    }
+                ],
+                games: [
+                    {
+                        id: "game3-1",
+                        title: "小遊戲一：「消失的細節」",
+                        question: "算命師說你下個月財運亨通，尤其是在與「水」相關的投資上，並且會遇到一位「戴眼鏡的男性」貴人。問題：貴人的特徵是什麼？",
+                        options: [
+                            { text: "A. 戴帽子的女性", value: "A", correct: false },
+                            { text: "B. 戴眼鏡的男性", value: "B", correct: true },
+                            { text: "C. 穿紅衣的男性", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "答對了！但如果問題更複雜，或時間隔更久，我們很容易忘記或混淆細節。",
+                        feedbackIncorrect: "正確答案是B。記憶的細節很容易隨著時間流逝而模糊或遺失。"
+                    },
+                    {
+                        id: "game3-2",
+                        title: "小遊戲二：「植入的記憶」",
+                        question: "情境：算命師看著你的手相說：「你的事業線很清晰，但中間有個小波折，不過最終會走向成功。」問題：算命師是否提到了你事業上的波折與「同事的嫉妒」有關？",
+                        options: [
+                            { text: "A. 是的，提到了。", value: "A", correct: false },
+                            { text: "B. 沒有提到。", value: "B", correct: true },
+                            { text: "C. 記不清楚了。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "答對了！原文並未提及「同事的嫉妒」。這顯示了誤導性信息可能如何干擾我們的記憶。",
+                        feedbackIncorrect: "實際上，原文並未提及「同事的嫉妒」。我們的記憶很容易受到後續暗示或問題的影響，產生「植入的記憶」。"
+                    },
+                     {
+                        id: "game3-3",
+                        title: "小遊戲三：「命中」與「錯過」",
+                        question: "一份包含10條預言的「算命報告」，其中3條比較準確，7條明顯不準。一段時間後，你更可能記住的是？",
+                        options: [
+                            { text: "A. 3條準確的預言", value: "A", correct: true },
+                            { text: "B. 7條不準的預言", value: "B", correct: false },
+                            { text: "C. 兩者記得一樣清楚", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "是的，我們傾向於選擇性地記住那些「命中」的部分，而忽略「錯過」的部分，這會強化算命「準確」的印象。",
+                        feedbackIncorrect: "選擇性記憶使我們更容易記住那些「說中了」的、或與我們信念一致的內容，而忽略不符的部分。"
+                    },
+                    {
+                        id: "game3-4",
+                        title: "小遊戲四：這是誰說的？",
+                        question: "你回憶起一個關於「保持耐心，機會即將來臨」的建議。你確定這是算命師說的，還是你自己曾有的想法，或是朋友的忠告？",
+                        options: [
+                            { text: "A. 非常確定是算命師說的。", value: "A", correct: false },
+                            { text: "B. 可能是算命師，也可能是自己想的。", value: "B", correct: true },
+                            { text: "C. 肯定是朋友說的。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "B是常見情況。來源監控錯誤指我們記住了信息，但搞錯了來源，這在記憶中很常見。",
+                        feedbackIncorrect: "我們的記憶有時會混淆信息的來源，這稱為「來源監控錯誤」。很難百分百確定一個模糊記憶的確切出處。"
+                    },
+                    {
+                        id: "game3-5",
+                        title: "小遊戲五：你的「算命故事」",
+                        question: "算命師給了你一些關於「愛情」的模糊提示，如「多留意身邊的人」。你會如何將這個提示和你近期的生活經歷結合，編織成一個故事？",
+                        options: [
+                            { text: "A. 我會回想最近是否有新的邂逅或互動。", value: "A", correct: true },
+                            { text: "B. 我覺得這提示太模糊，無法聯想。", value: "B", correct: false },
+                            { text: "C. 我會將它解讀為要更主動社交。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "A和C都展示了我們如何主動將外部信息融入個人敘事，使其變得有意義。這是敘事自我整合記憶的方式。",
+                        feedbackIncorrect: "我們傾向於將新的信息（即使模糊）編織進自己的人生故事中，使其連貫且有意義。這就是敘事自我的力量。"
+                    }
+                ]
+            },
+            // --- Tab 4: 大腦的尋模癖 ---
+            {
+                id: "tab4",
+                title: "大腦的尋模癖",
+                scenario: "天上的雲像小狗，隨機的數字排列似乎暗藏玄機……我們的大腦天生熱愛尋找模式和規律，即使在隨機事件中也是如此。這種特性與我們如何理解和接受算命有何關聯？",
+                steps: [
+                    // ... Tab 4 steps content from markdown ...
+                    {
+                        title: "Apophenia (圖形聯想) 與 Pareidolia (幻想性錯覺)",
+                        content: "Apophenia 是指在無關或隨機的事物中感知到模式或關聯的傾向。Pareidolia 特指在模糊刺激中感知到顯著模式。這與大腦視覺聯想皮質的活動有關，也可能與多巴胺系統的過度活躍有關（在某些情況下）。",
+                        citation: "引用參考：Riekki, T., Lindeman, M., & Svedholm-Häkkinen, A. M. (2020). Seeing patterns in randomness: A new questionnaire for measuring apophenia. Personality and Individual Differences. Liu, J., et al. (2022). Neural basis of pareidolia: A review of fMRI studies. Frontiers in Human Neuroscience."
+                    },
+                    {
+                        title: "大腦的模式識別機制",
+                        content: "大腦擁有強大的模式識別能力，這對於學習、生存至關重要。從初級感覺皮層到高級聯合皮層，大腦時刻在進行統計學習並提取環境中的規律性。",
+                        citation: "引用參考：Lake, B. M., Ullman, T. D., Tenenbaum, J. B., & Gershman, S. J. (2021). Building machines that learn and think like people. Behavioral and Brain Sciences. Turk-Browne, N. B. (2022). Statistical learning: A gateway to higher cognition. Trends in Cognitive Sciences."
+                    },
+                    {
+                        title: "隨機性與或然率的誤解",
+                        content: "人類直覺上很難準確理解隨機性和或然率。例如，「賭徒謬誤」。這與我們大腦中用於快速判斷的捷徑（啟發式思維）有關，這些捷徑在處理概率問題時容易出錯。",
+                        citation: "引用參考：Hahn, U., & Harris, A. J. L. (2022). The Rationality of Belief. Cambridge University Press. Donkin, C., et al. (2021). Cognitive biases in probabilistic reasoning: A review and a new taxonomy. Psychological Bulletin."
+                    },
+                    {
+                        title: "意義建構與不確定性的消減",
+                        content: "面對不確定和模糊的未來，大腦會努力尋找解釋和意義，以降低焦慮感。算命提供了一種結構化的敘事，滿足了大腦這種「秩序偏好」。",
+                        citation: "引用參考：Proulx, T., & Inzlicht, M. (2020). The Meaning Maintenance Model: On the coherence of social motivations. Personality and Social Psychology Review. Van den Bos, K., & Lind, E. A. (2021). Uncertainty management by means of fairness judgments. Advances in Experimental Social Psychology."
+                    },
+                    {
+                        title: "同步性 (Synchronicity) 的心理吸引力",
+                        content: "心理學家榮格提出的「同步性」概念，指有意義的巧合。雖然科學上難以驗證，但這種體驗對個人而言可能非常強烈。大腦對關聯性學習和巧合檢測的機制可能參與其中。",
+                        citation: "引用參考：Main, R. (2021). The Rupture of Time: Synchronicity and Jung's Critique of Modern Western Culture. Routledge. Brugger, P., & Taylor, K. I. (2020). ESP and anomolous experiences: A neurocognitive perspective. In Parapsychology: A Handbook for the 21st Century. McFarland."
+                    }
+                ],
+                games: [
+                    {
+                        id: "game4-1",
+                        title: "小遊戲一：雲中奇緣",
+                        question: "看著天空中的雲朵，你是否經常能「看」出動物、人臉或其他物體的形狀？",
+                        options: [
+                            { text: "A. 經常，很有趣！", value: "A", correct: true },
+                            { text: "B. 偶爾會。", value: "B", correct: true },
+                            { text: "C. 很少，雲就是雲。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "這是典型的 Pareidolia (幻想性錯覺)，我們的大腦傾向於在模糊或隨機的圖案中尋找熟悉的模式。",
+                        feedbackIncorrect: "即使選擇C，也無法完全擺脫大腦這種自動尋找模式的傾向。Pareidolia 是普遍的認知現象。"
+                    },
+                    {
+                        id: "game4-2",
+                        title: "小遊戲二：隨機序列猜謎",
+                        question: "擲硬幣，連續出現了5次正面。下一次出現反面的機率是否會更高？",
+                        options: [
+                            { text: "A. 是的，該出現反面了。", value: "A", correct: false },
+                            { text: "B. 不是，每次機率都是獨立的50%。", value: "B", correct: true },
+                            { text: "C. 不確定。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "答對了！每次擲硬幣都是獨立事件，過去的結果不影響未來。認為「該出現反面」是賭徒謬誤。",
+                        feedbackIncorrect: "這是常見的「賭徒謬誤」。實際上，每次擲硬幣的機率都是獨立的，依然是50%正面，50%反面。"
+                    },
+                    {
+                        id: "game4-3",
+                        title: "小遊戲三：「解讀」抽象圖案",
+                        question: "看到一個不規則的墨漬圖案，你是否會嘗試從中解讀出某種「意義」或「象徵」？",
+                        options: [
+                            { text: "A. 會，我會聯想它像什麼。", value: "A", correct: true },
+                            { text: "B. 不會，它就是個墨漬。", value: "B", correct: false },
+                            { text: "C. 看情況，如果有人引導我可能會。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "A和C都反映了 Apophenia，即在隨機或無關事物中尋找模式和意義的傾向，這是羅夏墨跡測驗等投射技術的基礎。",
+                        feedbackIncorrect: "即使是B，大腦深層可能仍在進行無意識的模式匹配。Apophenia 是我們認知系統的內建功能。"
+                    },
+                    {
+                        id: "game4-4",
+                        title: "小遊戲四：巧合製造機",
+                        question: "你剛想到一位久未聯繫的朋友，結果他/她就打電話來了。你認為這是？",
+                        options: [
+                            { text: "A. 純粹的巧合，但印象深刻。", value: "A", correct: true },
+                            { text: "B. 心電感應或預兆。", value: "B", correct: false },
+                            { text: "C. 可能我潛意識記住了某些線索。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "A和C是更科學的解釋。我們更容易記住「命中」的巧合，而忽略大量「未命中」的時刻。有時也可能存在潛意識的線索處理。",
+                        feedbackIncorrect: "雖然B的感覺很強烈，但「有意義的巧合」（同步性）往往是我們賦予的意義，而非事件本身的超自然聯繫。選擇性注意和記憶偏差也起了作用。"
+                    },
+                    {
+                        id: "game4-5",
+                        title: "小遊戲五：命運的「暗示」？",
+                        question: "你一天內多次看到特定數字（如11:11）。你會如何解讀？",
+                        options: [
+                            { text: "A. 認為它帶有特殊意義或暗示。", value: "A", correct: false },
+                            { text: "B. 意識到這可能只是選擇性注意力和確認偏誤。", value: "B", correct: true },
+                            { text: "C. 覺得有趣，但不會過多解讀。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "B和C是更理性的看法。一旦我們開始注意某個數字，就更容易在各處「發現」它，這主要是認知偏誤在運作。",
+                        feedbackIncorrect: "雖然A的感覺可能很強烈，但這通常是我們大腦「尋找模式」和「賦予意義」的傾向，加上選擇性注意力的結果。"
+                    }
+                ]
+            },
+            // --- Tab 5: 決策的十字路口 ---
+            {
+                id: "tab5",
+                title: "決策的十字路口",
+                scenario: "面臨人生重大抉擇時，有些人會求助於算命。算命的結果或建議，究竟是如何悄悄影響我們的大腦，進而左右我們的判斷和決策過程的？",
+                steps: [
+                    // ... Tab 5 steps content from markdown ...
+                    {
+                        title: "捷思法 (Heuristics) 與決策捷徑",
+                        content: "大腦在做決策時，常依賴一些經驗法則或心理捷徑（捷思法），以求快速高效。算命提供的「指引」可能被當作一種捷思，尤其是在信息不充分時。",
+                        citation: "引用參考：Gigerenzer, G. (2021). How to Stay Smart in a Smart World: Why Human Intelligence Still Beats Algorithms. MIT Press. Shah, A. K., & Oppenheimer, D. M. (2008). Heuristics made easy: An effort-reduction framework. Psychological Bulletin."
+                    },
+                    {
+                        title: "錨定效應 (Anchoring Effect) 的影響",
+                        content: "算命師給出的初始信息可能會像「錨」一樣，影響你後續思考和評估的範圍。這與大腦在處理數值或序位信息時的初始參照點設定有關。",
+                        citation: "引用參考：Furnham, A., & Boo, H. C. (2021). A literature review of the anchoring effect. Journal of Socio-Economics. Bahník, Š. (2021). Anchoring without a given anchor: A meta-analysis of studies using the standard anchoring paradigm. Thinking & Reasoning."
+                    },
+                    {
+                        title: "框架效應 (Framing Effect) 的巧妙引導",
+                        content: "同樣的內容，用不同的呈現方式（框架）來描述，會導致人們做出不同的決策。這與大腦的情緒處理（如杏仁核）和價值評估（如腹內側前額葉皮層）如何受到語言框架的調控有關。",
+                        citation: "引用參考：De Martino, B., Kumaran, D., Seymour, B., & Dolan, R. J. (2006). Frames, biases, and rational decision-making in the human brain. Science. Druckman, J. N., & Lupia, A. (2020). Framing and Persuasion. In The Oxford Handbook of Political Persuasion. Oxford University Press."
+                    },
+                    {
+                        title: "降低認知失調 (Cognitive Dissonance)",
+                        content: "當我們已經為算命付出了時間、金錢和情感投入後，如果算命結果與我們的期望或行為有衝突，可能會產生認知失調。為了減少這種不適，我們可能會改變自己的態度或行為。前扣帶皮層 (ACC) 被認為在監測衝突和失調中起作用。",
+                        citation: "引用參考：Harmon-Jones, E., & Mills, J. (Eds.). (2020). Cognitive Dissonance: Reexamining a Pivotal Theory in Psychology (2nd ed.). American Psychological Association. Izuma, K. (2022). The neural basis of cognitive dissonance. Trends in Cognitive Sciences."
+                    },
+                    {
+                        title: "外部歸因與責任轉移",
+                        content: "將決策的依據部分或全部「外包」給算命，可以在心理上減輕個人需要承擔的責任和壓力。這與歸因理論和控制點信念有關。",
+                        citation: "引用參考：Weiner, B. (2021). The legacy of an attribution approach to motivation and emotion: A personal account. Organizational Behavior and Human Decision Processes. Cheng, S. T., & Hui, E. L. (2023). Locus of control and psychological well-being: A meta-analysis of longitudinal studies. Journal of Personality."
+                    }
+                ],
+                games: [
+                    {
+                        id: "game5-1",
+                        title: "小遊戲一：決策小幫手？",
+                        question: "假設你正在考慮兩個工作機會 A 和 B，各有利弊。一位「大師」告訴你「選擇 A 更符合你的命格」。這對你的決策有何影響？",
+                        options: [
+                            { text: "A. 更傾向於選擇 A。", value: "A", correct: true },
+                            { text: "B. 會更仔細評估 A，但仍以理性分析為主。", value: "B", correct: true },
+                            { text: "C. 不受影響。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A和B都可能發生。算命的「指引」可能成為一種決策捷徑（捷思法），尤其在難以抉擇時，提供了一個簡化的方向。",
+                        feedbackIncorrect: "即使選擇C，也要警惕潛意識的影響。在信息模糊或壓力大時，外部「權威」的建議更容易左右我們的判斷。"
+                    },
+                    {
+                        id: "game5-2",
+                        title: "小遊戲二：「薪資」的錨",
+                        question: "你期望月薪5萬。算命師說「你第一份工作薪水不高，大概3萬5」。後來你拿到4萬5的offer，你的滿意度可能？",
+                        options: [
+                            { text: "A. 非常滿意，比預期的3萬5高！", value: "A", correct: true },
+                            { text: "B. 不太滿意，比我原本期望的5萬低。", value: "B", correct: false },
+                            { text: "C. 沒什麼感覺。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是典型的錨定效應。算命師給出的低「錨點」(3萬5)會影響你對後續offer的評價標準，使得4萬5看起來不錯。",
+                        feedbackIncorrect: "錨定效應指出，最初的信息（錨）會不成比例地影響我們後續的判斷。算命師的「3萬5」可能讓你對4萬5感覺更滿意。"
+                    },
+                    {
+                        id: "game5-3",
+                        title: "小遊戲三：好消息還是壞消息？",
+                        question: "關於一項有風險的投資：說法A：「有 70% 的機率成功」；說法B：「有 30% 的機率失敗」。哪種說法讓你更願意投資？",
+                        options: [
+                            { text: "A. 說法A (70%成功)", value: "A", correct: true },
+                            { text: "B. 說法B (30%失敗)", value: "B", correct: false },
+                            { text: "C. 兩者一樣。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "多數人會選擇A。這是框架效應：同樣的實質內容，以積極框架（成功機率）呈現比消極框架（失敗機率）更具吸引力。",
+                        feedbackIncorrect: "框架效應顯示，信息的呈現方式（而非僅內容本身）會顯著影響我們的決策。強調「成功」通常比強調「失敗」更有說服力。"
+                    },
+                    {
+                        id: "game5-4",
+                        title: "小遊戲四：花錢買「心安」",
+                        question: "你花了一筆不小的費用請人「改運」，但短期內似乎沒有明顯效果。此時你的心理狀態更可能是？",
+                        options: [
+                            { text: "A. 覺得被騙了，很後悔。", value: "A", correct: false },
+                            { text: "B. 相信「心誠則靈」，效果可能比較慢。", value: "B", correct: true },
+                            { text: "C. 開始尋找生活中任何微小的積極變化，並將其歸功於「改運」。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "B和C是常見的認知失調調適。為了合理化已付出的成本（時間、金錢），我們會傾向於相信其有效性或尋找支持性證據。",
+                        feedbackIncorrect: "為了減少認知失調（已付出成本 vs. 未見效果），人們可能會改變信念（B）或尋找證據來支持自己的行為（C）。"
+                    },
+                    {
+                        id: "game5-5",
+                        title: "小遊戲五：誰的責任？",
+                        question: "如果你根據算命的建議做出了一個重要選擇，但結果並不好。你更傾向於如何解釋這個結果？",
+                        options: [
+                            { text: "A. 都是我自己的錯，當初不該輕信。", value: "A", correct: false },
+                            { text: "B. 算命的說法可能不夠全面，或我理解錯了。", value: "B", correct: true },
+                            { text: "C. 這就是命中注定，非人力所能改變。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "B和C都體現了外部歸因或責任轉移。將失敗歸咎於外部因素（算命不準、命運）可以在心理上減輕個人的壓力和自責。",
+                        feedbackIncorrect: "外部歸因（如B和C）是一種心理防衛機制，可以幫助我們在面對不如意的結果時，減輕個人的責任感和負面情緒。"
+                    }
+                ]
+            },
+            // --- Tab 6: 情緒的慰藉 ---
+            {
+                id: "tab6",
+                title: "情緒的慰藉",
+                scenario: "生活總有不如意，當我們感到焦慮、悲傷、迷茫無助時，似乎更容易被算命所吸引。本情境將探索情緒狀態如何影響我們對算命的需求和反應。",
+                steps: [
+                    {
+                        title: "不確定性厭惡與情緒調節",
+                        content: "人類普遍不喜歡不確定性，它會引發焦慮。算命似乎提供了一種關於未來的「信息」，有助於暫時緩解這種負面情緒。杏仁核和前額葉皮質在不確定性處理和情緒調節中扮演關鍵角色。",
+                        citation: "引用參考：Grupe, D. W., & Nitschke, J. B. (2020). Uncertainty and anticipation in anxiety: an integrated neurobiological and psychological perspective. Nature Reviews Neuroscience. Carleton, R. N. (2021). Into the unknown: A review and synthesis of contemporary models of uncertainty intolerance. Canadian Psychology/Psychologie canadienne."
+                    },
+                    {
+                        title: "尋求控制感",
+                        content: "失控感是負面情緒的重要來源。算命提供了一種虛幻的控制感。大腦中與能動性 (agency) 和控制感相關的神經迴路，如前額葉-頂葉網絡，可能被間接影響。",
+                        citation: "引用參考：Skinner, E. A., & Zimmer-Gembeck, M. J. (2021). Perceived control: A multidimensional developmental pathway to competence, autonomy, and relatedness. In Handbook of Competence and Motivation (2nd ed.): Theory and Application. Guilford Press. Leotti, L. A., Iyengar, S. S., & Ochsner, K. N. (2010). Born to choose: The origins and value of the need for control. Trends in Cognitive Sciences."
+                    },
+                    {
+                        title: "社會支持與情感連結的替代",
+                        content: "有些算命師扮演了傾聽者和安慰者的角色。在缺乏足夠社會支持時，這種互動可能提供短暫的情感慰藉。大腦對社會連結和共情的反應是天生的，催產素等神經遞質參與其中。",
+                        citation: "引用參考：Eisenberger, N. I. (2022). The neural bases of social pain: Evidence for shared representations with physical pain. Psychosomatic Medicine. Inagaki, T. K. (2021). The neurobiology of social support. Current Opinion in Psychology."
+                    },
+                    {
+                        title: "希望感與積極預期的力量",
+                        content: "即使只是模糊的積極預言，也能在短期內提升人的希望感和積極情緒。希望感與大腦多巴胺獎賞系統有關，能激發動力。",
+                        citation: "引用參考：Gallagher, M. W., & Lopez, S. J. (Eds.). (2021). The Oxford Handbook of Hope. Oxford University Press. Sharot, T. (2020). The Optimism Bias: A Tour of the Irrationally Positive Brain. Vintage."
+                    },
+                    {
+                        title: "認知卸載與情緒宣洩",
+                        content: "將困擾已久的問題和負面情緒「傾訴」給算命師，本身就是一種情緒的宣洩。同時，將思考的責任部分「轉移」，可以暫時減輕認知負荷。",
+                        citation: "引用參考：Pennebaker, J. W., & Chung, C. K. (2021). Expressive writing: Connections to physical and mental health. In The Oxford Handbook of Health Psychology. Oxford University Press. Gilbert, D. T. (2006). Stumbling on Happiness. Knopf."
+                    }
+                ],
+                games: [
+                     {
+                        id: "game6-1",
+                        title: "小遊戲一：壓力水平與算命意願",
+                        question: "當你感到極度焦慮和不確定時，是否比平靜時更傾向於想「算一下」未來？",
+                        options: [
+                            { text: "A. 是的，非常時期更想尋求指引。", value: "A", correct: true },
+                            { text: "B. 不是，情緒不影響我的理性。", value: "B", correct: false },
+                            { text: "C. 不一定，看情況。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是常見反應。高度不確定性和焦慮會促使我們尋求任何能降低不適感的信息來源，算命提供了這種可能。",
+                        feedbackIncorrect: "研究表明，在壓力、焦慮和不確定感較高時，人們更容易尋求外部的、甚至超自然的解釋和安慰。"
+                    },
+                    {
+                        id: "game6-2",
+                        title: "小遊戲二：「掌控」的感覺",
+                        question: "當生活中出現一件你無法控制的負面事件時，算命提供的「未來走向」是否能讓你感覺稍微好一點？",
+                        options: [
+                            { text: "A. 是的，即使模糊也比完全未知好。", value: "A", correct: true },
+                            { text: "B. 不會，那只是虛幻的安慰。", value: "B", correct: false },
+                            { text: "C. 可能會暫時好一點。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "A和C都反映了算命在提供「控制感」方面的作用。即使是虛幻的控制感，也能在一定程度上緩解失控帶來的焦慮。",
+                        feedbackIncorrect: "對許多人而言，即使知道算命的預測不一定準確，那種「彷彿知道了什麼」的感覺也能提供短暫的心理控制感，從而緩解焦慮。"
+                    },
+                    {
+                        id: "game6-3",
+                        title: "小遊戲三：傾聽的力量",
+                        question: "你正為某事煩惱，一位算命師耐心聽你講述了30分鐘，並給予了一些安慰性的話語（不涉及具體預測）。你的感受如何？",
+                        options: [
+                            { text: "A. 感覺好多了，有人傾聽很重要。", value: "A", correct: true },
+                            { text: "B. 沒什麼用，問題還沒解決。", value: "B", correct: false },
+                            { text: "C. 有一點點幫助。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "A和C是常見感受。算命過程中的傾聽和情感支持，本身就具有一定的心理治療效果，尤其在缺乏其他支持時。",
+                        feedbackIncorrect: "算命師有時扮演了心理諮詢師的某些角色，單純的傾聽和被理解就能帶來情緒上的慰藉。"
+                    },
+                    {
+                        id: "game6-4",
+                        title: "小遊戲四：「希望」膠囊",
+                        question: "假設你處於困境，算命師告訴你「三個月後，一切都會好轉」。這句話對你當下的情緒和行為有何影響？",
+                        options: [
+                            { text: "A. 讓我暫時感到寬慰和有盼頭。", value: "A", correct: true },
+                            { text: "B. 完全不相信，覺得是空話。", value: "B", correct: false },
+                            { text: "C. 可能會讓我更有動力堅持一下。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "A和C都體現了「希望感」的力量。一個積極的預期，即使模糊，也能在短期內提振情緒，增加應對困難的動力。",
+                        feedbackIncorrect: "希望是一種強大的心理資源。算命提供的積極預期，即使其真實性存疑，也能在短期內給予人希望，從而改善情緒。"
+                    },
+                    {
+                        id: "game6-5",
+                        title: "小遊戲五：煩惱「寄存處」",
+                        question: "將困擾已久的問題和負面情緒「傾訴」給算命師，是否讓你感覺肩上的擔子輕了一些？",
+                        options: [
+                            { text: "A. 是的，說出來感覺好多了。", value: "A", correct: true },
+                            { text: "B. 沒有，問題還在。", value: "B", correct: false },
+                            { text: "C. 有一點釋放的感覺。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "A和C是常見體驗。情緒宣洩（說出來）和認知卸載（暫時把問題交給別人）都有助於短期內減輕心理壓力。",
+                        feedbackIncorrect: "將煩惱「說出來」本身就有情緒宣洩作用。同時，感覺有人（算命師）在「處理」你的問題，可以暫時減輕你的認知負擔。"
+                    }
+                ]
+            },
+             // --- Tab 7: 「直覺」的迷思 ---
+            {
+                id: "tab7",
+                title: "「直覺」的迷思",
+                scenario: "有些算命師似乎擁有驚人的「直覺」和洞察力，能一眼看穿你的心思。這真的是超能力嗎？本情境將揭開所謂「讀心術」背後的技巧——冷讀術與熱讀術。",
+                steps: [
+                    {
+                        title: "冷讀術 (Cold Reading) 的基本原理",
+                        content: "冷讀術是透過觀察、提問和高機率猜測，讓對方相信算命師對其有深入了解的技巧。這涉及到社會認知和人際互動的複雜過程。",
+                        citation: "引用參考：Wiseman, R. (2021). Shooting a fish in a barrel: The psychology of cold reading. Skeptical Inquirer. Hyman, R. (1977). “Cold reading”: How to convince strangers that you know all about them. The Zetetic (now Skeptical Inquirer)."
+                    },
+                    {
+                        title: "觀察入微：非語言線索的解讀",
+                        content: "冷讀者擅長從對方的衣著打扮、微表情、語氣語調等非語言線索中獲取信息。大腦中處理社會信息的腦區，如杏仁核、梭狀回（面部識別）和顳上溝（生物運動感知）參與其中。",
+                        citation: "引用參考：Ekman, P. (2020). Nonverbal Messages: Cracking the Code. Schilbach, L. (2021). The neuroscience of social perception. In The Oxford Handbook of Social Neuroscience. Oxford University Press."
+                    },
+                    {
+                        title: "高機率猜測與普遍性陳述",
+                        content: "冷讀者會使用大量基於統計和生活常識的高機率陳述（類似巴納姆語句）。",
+                        citation: "引用參考：(同分頁一卡片一的巴納姆效應引用方向) Farias, M., & Lalljee, M. (2021). The psychology of belief: Why we believe what we believe. Routledge."
+                    },
+                    {
+                        title: "「釣魚」與逐步確認",
+                        content: "冷讀者會拋出試探性的問題或陳述，然後根據對方的反饋來調整後續的說法。這是一種動態的互動策略，類似於某些人工智能的學習方式。",
+                        citation: "引用參考：Vrij, A. (2022). Detecting Lies and Deceit: Pitfalls and Opportunities (3rd ed.). Wiley."
+                    },
+                    {
+                        title: "熱讀術 (Hot Reading) - 事先的情報搜集",
+                        content: "熱讀術是指算命師在見面前，已經透過各種渠道獲取了關於求問者的個人信息。在大數據時代，個人信息的獲取更為便捷，也引發了隱私擔憂。",
+                        citation: "引用參考：Turow, J. (2021). The Voice Catchers: How Marketers Listen In to Exploit Your Feelings, Your Privacy, and Your Wallet. Yale University Press."
+                    }
+                ],
+                games: [
+                    {
+                        id: "game7-1",
+                        title: "小遊戲一：察言觀色",
+                        question: "看到一個人眉頭緊鎖、頻繁看錶，你最可能推測他/她？",
+                        options: [
+                            { text: "A. 感到焦慮或不耐煩。", value: "A", correct: true },
+                            { text: "B. 正在思考一個複雜問題。", value: "B", correct: false },
+                            { text: "C. 眼睛不舒服。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是基於常見非語言線索的合理推測。冷讀者擅長從這些細節中快速形成初步判斷。",
+                        feedbackIncorrect: "雖然B和C也有可能，但A（焦慮/不耐煩）是從「眉頭緊鎖、頻繁看錶」這些線索中最直接和常見的推斷。冷讀術依賴這類高機率判斷。"
+                    },
+                    {
+                        id: "game7-2",
+                        title: "小遊戲二：「神探」的提問",
+                        question: "想快速了解一位陌生訪客的「感情狀況」，以下哪個問題更像冷讀者的「釣魚」式提問？",
+                        options: [
+                            { text: "A. 「你結婚了嗎？」", value: "A", correct: false },
+                            { text: "B. 「我感覺你在人際關係方面，似乎有些未解的心結？」", value: "B", correct: true },
+                            { text: "C. 「你目前是單身還是有伴侶？」", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "B是典型的冷讀技巧。它模糊、普遍適用，且容易引導對方提供更多信息，無論對方回答「是」或「否」，算命師都能順勢發揮。",
+                        feedbackIncorrect: "A和C是直接提問。B則更為模糊和引導性，無論對方如何回應，冷讀者都能從中找到切入點，這是「釣魚」的核心。"
+                    },
+                    {
+                        id: "game7-3",
+                        title: "小遊戲三：模糊定調",
+                        question: "「你是一個有正義感的人，但有時也會為了避免衝突而選擇妥協。」這句話是否很容易讓你產生「說的就是我」的感覺？",
+                        options: [
+                            { text: "A. 是的，非常符合。", value: "A", correct: true },
+                            { text: "B. 有一點點像。", value: "B", correct: true },
+                            { text: "C. 完全不像。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A和B是常見反應。這種陳述包含了普遍的人性特點（正義感和避免衝突），適用於大多數人，是巴納姆效應和冷讀術的常用技巧。",
+                        feedbackIncorrect: "這種「兩面討好」的陳述是冷讀術的基礎之一。它涵蓋了人性的不同方面，因此很容易讓聽者覺得被準確描述。"
+                    },
+                    {
+                        id: "game7-4",
+                        title: "小遊戲四：看你「上鉤」",
+                        question: "算命師：「我感覺你最近為某個『選擇』而困擾，對嗎？」如果你點頭，算命師接下來最可能說什麼來「深化」這個話題？",
+                        options: [
+                            { text: "A. 「這個選擇是不是跟你的工作有關？」(試探)", value: "A", correct: true },
+                            { text: "B. 「你應該選擇A方案。」(直接給答案)", value: "B", correct: false },
+                            { text: "C. 「很多人都有選擇困難症。」(轉移話題)", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是典型的逐步確認。冷讀者會根據你的反應，拋出更具體的試探，如果再次得到肯定，就會讓你覺得他「看透」了你。",
+                        feedbackIncorrect: "冷讀者會利用你的肯定反饋，進行更進一步的、看似具體的猜測（如A），如果猜中，則「神準」的印象就建立了。B太直接，C則放棄了線索。"
+                    },
+                    {
+                        id: "game7-5",
+                        title: "小遊戲五：社交足跡的秘密",
+                        question: "如果有人想在算命前「熱讀」你，你的公開社交媒體（如FB/IG）最可能暴露你的哪些信息？",
+                        options: [
+                            { text: "A. 你的興趣愛好、最近的活動地點。", value: "A", correct: true },
+                            { text: "B. 你的朋友圈、家庭成員（如果設為公開）。", value: "B", correct: true },
+                            { text: "C. 你對某些議題的看法、情緒狀態。", value: "C", correct: true },
+                            { text: "D. 以上皆是。", value: "D", correct: true }
+                        ],
+                        feedbackCorrect: "D是正確的。在數字時代，我們的公開社交媒體是「熱讀術」的重要信息來源。謹慎設置隱私很重要。",
+                        feedbackIncorrect: "以上皆是。社交媒體上的公開信息，如興趣、打卡地點、好友互動、公開發文等，都可能成為「熱讀術」的材料。"
+                    }
+                ]
+            },
+            // --- Tab 8: 大腦的獎賞回路 ---
+            {
+                id: "tab8",
+                title: "大腦的獎賞回路",
+                scenario: "有些人對算命非常着迷，一次又一次地尋求指引，甚至到了「上癮」的程度。這背後是否有大腦獎賞機制的作用？",
+                steps: [
+                     {
+                        title: "多巴胺與獎賞預期",
+                        content: "大腦的多巴胺系統與獎賞、動機和愉悅感密切相關。對「好消息」或「問題解決方案」的期待，可能刺激多巴胺的釋放。伏隔核是獎賞迴路中的關鍵腦區。",
+                        citation: "引用參考：Schultz, W. (2020). Dopamine reward prediction error signalling: a two-component response. Nature Reviews Neuroscience. Sescousse, G., Caldú, X., Segura, B., & Deserno, L. (2021). Processing of primary and secondary rewards in the human brain: A meta-analysis of fMRI studies. Neuroscience & Biobehavioral Reviews."
+                    },
+                    {
+                        title: "間歇性強化 (Intermittent Reinforcement)",
+                        content: "算命的結果往往是間歇性「準確」或帶來「好消息」的。在行為心理學中，間歇性強化比持續強化更容易形成牢固的習慣甚至成癮行為。",
+                        citation: "引用參考：Bouton, M. E. (2022). Learning and Behavior: A Contemporary Synthesis (3rd ed.). Sinauer Associates. Lüscher, C., Robbins, T. W., & Everitt, B. J. (2020). The transition to compulsion in addiction. Nature Reviews Neuroscience."
+                    },
+                    {
+                        title: "緩解焦慮的負強化",
+                        content: "算命可以在短期內緩解因不確定性引發的焦慮。這種「負面情緒的消除」本身就是一種負強化，會增加未來再次尋求算命的行為概率。",
+                        citation: "引用參考：(同分頁六卡片一關於不確定性厭惡和情緒調節的引用方向) Grupe, D. W., & Nitschke, J. B. (2020). Uncertainty and anticipation in anxiety: an integrated neurobiological and psychological perspective. Nature Reviews Neuroscience."
+                    },
+                    {
+                        title: "尋求新奇感與信息",
+                        content: "大腦對新奇刺激和新的信息有一定的偏好。每次算命都可能帶來一些「新的」說法，滿足了這種對新奇感的追求。海馬迴和多巴胺系統都參與了對新奇刺激的反應。",
+                        citation: "引用參考：Bunzeck, N., & Düzel, E. (2006). Absolute coding of stimulus novelty in the human substantia nigra/VTA. Neuron. Guitart-Masip, M., et al. (2021). Novelty, exploration, and the brain. Current Opinion in Behavioral Sciences."
+                    },
+                    {
+                        title: "從習慣到依賴：潛在的心理脆弱性",
+                        content: "對於本身存在較高焦慮水平、控制感較低、或缺乏其他有效應對壓力方式的個體，更容易從偶爾的算命發展為習慣性依賴。",
+                        citation: "引用參考：Billieux, J., et al. (2021). Problematic use of the internet and its components: A transdiagnostic approach. Clinical Psychology Review. Grant, J. E., & Chamberlain, S. R. (2022). Behavioral Addictions: DSM-5 and Beyond. American Psychiatric Publishing."
+                    }
+                ],
+                games: [
+                    {
+                        id: "game8-1",
+                        title: "小遊戲一：「再抽一張牌？」",
+                        question: "玩一個抽獎遊戲，第一次沒中，第二次中了個小獎。你是否更想繼續抽下去，期待中大獎？",
+                        options: [
+                            { text: "A. 是的，感覺好運要來了！", value: "A", correct: true },
+                            { text: "B. 不會，見好就收。", value: "B", correct: false },
+                            { text: "C. 看情況，如果成本不高可以再試試。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "A和C都反映了獎賞預期對行為的驅動。多巴胺的釋放與「期待獎賞」有關，即使只是小獎，也可能強化繼續嘗試的動機。",
+                        feedbackIncorrect: "對「可能獲得獎賞」的期待，會刺激大腦多巴胺系統，產生愉悅感並驅使我們重複可能帶來獎賞的行為，這是成癮行為的基礎之一。"
+                    },
+                    {
+                        id: "game8-2",
+                        title: "小遊戲二：老虎機 vs. 固定獎勵",
+                        question: "A. 每次按按鈕固定得1元。 B. 按按鈕有時沒獎勵，但偶爾一次得5元。哪種情況讓你更「沉迷」，想一直按下去？",
+                        options: [
+                            { text: "A. 固定獎勵", value: "A", correct: false },
+                            { text: "B. 間歇性獎勵 (老虎機模式)", value: "B", correct: true }
+                        ],
+                        feedbackCorrect: "B是正確的。間歇性強化（像老虎機）比持續固定強化更容易讓人「上癮」，因為不可預測的獎賞更具刺激性和吸引力。",
+                        feedbackIncorrect: "間歇性、不可預測的獎勵（如B，老虎機模式）比固定獎勵（A）更容易讓人形成強迫性重複行為，這是賭博等成癮行為的核心機制。"
+                    },
+                    {
+                        id: "game8-3",
+                        title: "小遊戲三：「解憂」的循環",
+                        question: "當你感到非常焦慮時，算命讓你暫時平靜下來。下次再遇到類似程度的焦慮，你首先想到的解決方法更可能是？",
+                        options: [
+                            { text: "A. 再次去算命。", value: "A", correct: true },
+                            { text: "B. 尋找其他更根本的解決方法。", value: "B", correct: false },
+                            { text: "C. 忍耐一下，會過去的。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是負強化的結果。算命消除了焦慮（負面刺激），這種「解脫感」會強化未來在焦慮時再次求助算命的行為。",
+                        feedbackIncorrect: "如果算命成功地「消除」了你的焦慮（負面刺激被移除），這就構成了負強化，會增加你未來在類似情境下重複該行為（算命）的機率。"
+                    },
+                    {
+                        id: "game8-4",
+                        title: "小遊戲四：神秘的「錦囊」",
+                        question: "你面前有三個「錦囊」，據說裡面有關於你未來的不同「秘密」。你有多大的衝動想把它們都打開看看？",
+                        options: [
+                            { text: "A. 非常想，好奇心驅使！", value: "A", correct: true },
+                            { text: "B. 有點想，但可以克制。", value: "B", correct: true },
+                            { text: "C. 不太想，順其自然。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A和B都反映了人類對新奇感和未知信息的天然好奇。算命提供的「神秘感」和「新信息」滿足了這種心理需求。",
+                        feedbackIncorrect: "大腦對新奇刺激和未知信息有天然的偏好。算命提供的「神秘感」和「揭示未來」的承諾，能有效激發我們的好奇心和探索欲。"
+                    },
+                    {
+                        id: "game8-5",
+                        title: "小遊戲五：依賴度小測試",
+                        question: "如果你發現自己做任何重要決定前都「必須」先算命，否則就心神不寧，這是否可能是一種依賴的信號？",
+                        options: [
+                            { text: "A. 是的，這聽起來有點像依賴了。", value: "A", correct: true },
+                            { text: "B. 不是，這只是謹慎的表現。", value: "B", correct: false },
+                            { text: "C. 不確定，需要更多評估。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是正確的。當算命從參考變為「必需」，並影響到正常生活和自主決策時，就可能構成心理依賴。",
+                        feedbackIncorrect: "當某種行為（如算命）成為應對壓力和做決策的唯一或主要方式，並且不做就會感到強烈不安時，就可能達到了依賴的程度。"
+                    }
+                ]
+            },
+            // --- Tab 9: 文化的印記 ---
+            {
+                id: "tab9",
+                title: "文化的印記",
+                scenario: "對算命的相信程度和態度，深受我們所處的文化環境、家庭教育和個人生命經驗的影響。本情境將探討這些外部因素如何與大腦的認知和情感處理相互作用。",
+                steps: [
+                    {
+                        title: "文化敘事與集體潛意識",
+                        content: "許多文化中都存在關於命運、預兆等的悠久敘事。這些文化模因會透過社會學習影響個體的世界觀。文化神經科學探討文化如何塑造大腦結構和功能。",
+                        citation: "引用參考：Han, S., & Ma, Y. (2020). Cultural neuroscience: A new frontier in understanding human psychology. Annual Review of Psychology. Kitayama, S., & Salvador, C. E. (2021). Culture and the brain: A new-old frontier. Current Opinion in Behavioral Sciences."
+                    },
+                    {
+                        title: "社會學習與模仿",
+                        content: "我們會透過觀察和模仿他人的行為來學習。如果成長環境中，重要他人對算命持肯定態度，個體也更容易接受。大腦中的鏡像神經元系統被認為與模仿學習有關。",
+                        citation: "引用參考：Heyes, C. (2021). Cognitive Gadgets: The Cultural Evolution of Thinking. Harvard University Press. Rizzolatti, G., & Sinigaglia, C. (2022). The mirror mechanism: A basic principle of brain function. Nature Reviews Neuroscience."
+                    },
+                    {
+                        title: "從眾效應 (Conformity Effect)",
+                        content: "在群體中，個體傾向於表現出與大多數人一致的行為或信念。這與大腦獎賞系統（符合群體預期）和衝突監測系統（偏離群體預期）的活動有關。",
+                        citation: "引用參考：Cialdini, R. B. (2021). Influence, New and Expanded: The Psychology of Persuasion. Harper Business. Stallen, M., & Sanfey, A. G. (2020). The neuroscience of social conformity and deviance. In The Oxford Handbook of Social Neuroscience. Oxford University Press."
+                    },
+                    {
+                        title: "個人重大生活事件的影響",
+                        content: "經歷重大的、難以解釋或控制的生活事件後，一些人可能會轉向算命等超自然解釋，試圖為這些事件尋找意義。這涉及到應激反應和意義重建過程。",
+                        citation: "引用參考：(同分頁二卡片四關於意義建構的引用方向) Park, C. L. (2020). Making sense of the meaning literature: An integrative review of meaning making and its effects on adjustment to stressful life events. Psychological Bulletin."
+                    },
+                    {
+                        title: "教育水平與批判性思維",
+                        content: "一般而言，較高的教育水平和較強的批判性思維能力，與對偽科學的懷疑態度相關。批判性思維的培養涉及到前額葉皮質的高級認知功能。",
+                        citation: "引用參考：Halpern, D. F., & Dunn, D. S. (2021). Critical Thinking in Psychology (2nd ed.). Cambridge University Press. Stanovich, K. E. (2022). The Rationality Quotient: Toward a Test of Rational Thinking. MIT Press."
+                    }
+                ],
+                games: [
+                    {
+                        id: "game9-1",
+                        title: "小遊戲一：你的「文化基因」",
+                        question: "在你的成長文化背景中（家庭、地域），長輩是否經常談論「生肖運勢」、「風水」或「面相」？",
+                        options: [
+                            { text: "A. 是的，非常普遍。", value: "A", correct: true },
+                            { text: "B. 偶爾會提到。", value: "B", correct: true },
+                            { text: "C. 幾乎不提。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A和B都反映了文化環境對個人信念的塑造作用。從小耳濡目染的文化敘事會潛移默化地影響我們對算命等現象的接受度。",
+                        feedbackIncorrect: "文化是信念形成的重要土壤。即使選擇C，社會大環境中依然存在各種相關的文化信息。"
+                    },
+                    {
+                        id: "game9-2",
+                        title: "小遊戲二：朋友圈的「風向」",
+                        question: "如果你身邊的好朋友都熱衷於討論星座運勢和塔羅牌占卜，並邀請你一起參與。你的態度更可能是？",
+                        options: [
+                            { text: "A. 積極融入，覺得好玩。", value: "A", correct: true },
+                            { text: "B. 表面應和，內心保留。", value: "B", correct: true },
+                            { text: "C. 委婉拒絕，不感興趣。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A和B都可能受到社會學習和從眾效應的影響。為了融入群體或避免被視為異類，我們可能會採納或至少不公開反對群體的普遍看法。",
+                        feedbackIncorrect: "從眾是強大的社會力量。即使不完全相信，群體氛圍也可能讓我們更傾向於參與或接受某些行為和觀點。"
+                    },
+                    {
+                        id: "game9-3",
+                        title: "小遊戲三：人生「轉捩點」的選擇",
+                        question: "當面臨一個非常迷茫的人生十字路口（例如畢業求職、重大感情抉擇）時，你是否更容易考慮求助算命？",
+                        options: [
+                            { text: "A. 是的，希望能獲得一些指引。", value: "A", correct: true },
+                            { text: "B. 不會，我會依靠自己分析。", value: "B", correct: false },
+                            { text: "C. 可能會，作為參考之一。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "A和C是常見情況。在人生重大轉折點或面臨巨大不確定性時，人們尋求外部指引（包括算命）的動機會增強，試圖尋找意義或方向。",
+                        feedbackIncorrect: "重大生活事件帶來的壓力和不確定感，往往會促使人們尋求超越常規的解釋和指引，算命在此時可能成為一種心理慰藉或決策參考。"
+                    },
+                    {
+                        id: "game9-4",
+                        title: "小遊戲四：信念連連看 (概念)",
+                        question: "「經歷過無法解釋的巧合」的人，是否比「科學思維較強」的人，更傾向於相信算命？ (此為普遍傾向，非絕對)",
+                        options: [
+                            { text: "A. 是的，可能性更高。", value: "A", correct: true },
+                            { text: "B. 不是，兩者無關。", value: "B", correct: false },
+                            { text: "C. 不一定。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是基於普遍觀察的推測。個人經歷（如神秘體驗）和思維方式（如對科學的信賴度）都會影響對算命的態度。",
+                        feedbackIncorrect: "個人經歷和思維模式共同塑造我們對世界的看法。經歷過「神秘」巧合的人可能更容易接受超自然解釋，而強調科學實證的人則傾向懷疑。"
+                    },
+                    {
+                        id: "game9-5",
+                        title: "小遊戲五：「火眼金睛」辨真偽",
+                        question: "「根據量子糾纏原理，你的意念可以瞬間影響千里之外的星辰磁場，從而改變你的運勢。」這句話聽起來？",
+                        options: [
+                            { text: "A. 非常科學，有道理！", value: "A", correct: false },
+                            { text: "B. 聽起來高深，但好像不太對勁。", value: "B", correct: true },
+                            { text: "C. 胡說八道，濫用科學名詞。", value: "C", correct: true }
+                        ],
+                        feedbackCorrect: "B和C是更具批判性的看法。許多偽科學論述喜歡借用高深的科學名詞來包裝自己，但其邏輯往往經不起推敲。培養批判性思維很重要。",
+                        feedbackIncorrect: "這句話是典型的偽科學論述，濫用了「量子糾纏」等科學術語，但其推論缺乏科學依據。批判性思維有助於我們辨別這類信息。"
+                    }
+                ]
+            },
+            // --- Tab 10: 超越算命 ---
+            {
+                id: "tab10",
+                title: "超越算命",
+                scenario: "了解了算命背後的大腦科學和心理機制後，我們如何能更理性地看待它，並在生活中培養更積極、自主的態度，真正掌握自己的人生方向？",
+                steps: [
+                    {
+                        title: "認識並反思自身的認知偏誤",
+                        content: "學習識別常見的認知偏誤（如確認偏誤、巴納姆效應等）如何在日常生活中影響我們的判斷。有意識地反思自己的思考過程，尤其是在做重要決策或評估信息時，有助於減少偏誤的影響。",
+                        citation: "引用參考：Kahneman, D. (2021). Noise: A Flaw in Human Judgment. Little, Brown Spark. Morewedge, C. K., & Kahneman, D. (Eds.). (2022). Debiasing: The Science of Better Decision-Making."
+                    },
+                    {
+                        title: "擁抱不確定性，提升容忍度",
+                        content: "人生充滿未知，學會與不確定性共處，而不是試圖完全消除它，是心理健康的標誌。透過正念練習、接受與承諾療法 (ACT) 等方法，可以提升對不確定性的容忍度和應對能力。",
+                        citation: "引用參考：Hayes, S. C. (2020). A Liberated Mind: How to Pivot Toward What Matters. Avery. Grossman, P., Niemann, L., Schmidt, S., & Walach, H. (2004). Mindfulness-based stress reduction and health benefits: A meta-analysis. Journal of Psychosomatic Research."
+                    },
+                    {
+                        title: "建立內在的控制感與自我效能",
+                        content: "將焦點從外部的「命運」轉向內在的努力和能力。設定實際可行的目標，並透過行動逐步實現，可以增強自我效能感（相信自己有能力完成任務和達成目標），從而獲得真正的掌控感。",
+                        citation: "引用參考：Bandura, A. (2021). Self-Efficacy: The Exercise of Control. Maddux, J. E. (Ed.). (2022). Self-Efficacy, Adaptation, and Adjustment: Theory, Research, and Application (2nd ed.). Springer."
+                    },
+                    {
+                        title: "培養健康的應對機制與尋求真實的社會支持",
+                        content: "當面臨壓力和困境時，發展健康的應對策略，如積極解決問題、尋求家人朋友的真實情感支持、進行運動、培養興趣愛好等，遠比依賴算命更可靠和有益。",
+                        citation: "引用參考：Folkman, S. (2020). Stress, coping, and adaptation. In The Oxford Handbook of Stress, Health, and Coping. Oxford University Press. Cohen, S., & Wills, T. A. (1985). Stress, social support, and the buffering hypothesis. Psychological Bulletin."
+                    },
+                    {
+                        title: "將算命視為一種文化娛樂或心理參考，而非決策的唯一依據",
+                        content: "如果個人選擇接觸算命，應將其視為一種文化現象、娛樂方式或提供不同視角的參考，但絕不能將其作為人生重大決策的唯一或主要依據。始終保持批判性思考，最終為自己的人生負責。",
+                        citation: "引用參考：Sagan, C. (1995). The Demon-Haunted World: Science as a Candle in the Dark. Random House. Shermer, M. (2020). Giving the Devil His Due: Reflections of a Scientific Humanist. Cambridge University Press."
+                    }
+                ],
+                games: [
+                    {
+                        id: "game10-1",
+                        title: "小遊戲一：「偏誤」糾察隊",
+                        question: "你非常喜歡某個品牌的產品，當看到關於它的負面評價時，你傾向於認為「那是個案」或「評價者太挑剔」。這可能涉及哪種認知偏誤？",
+                        options: [
+                            { text: "A. 確認偏誤 (Confirmation Bias)", value: "A", correct: true },
+                            { text: "B. 後見之明偏誤 (Hindsight Bias)", value: "B", correct: false },
+                            { text: "C. 錨定效應 (Anchoring Effect)", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是正確的。確認偏誤使我們傾向於尋找、解釋和回憶那些證實我們既有信念的信息，而輕視相反的證據。",
+                        feedbackIncorrect: "這是典型的「確認偏誤」。我們更容易接受與自己先前信念一致的信息，而對不一致的信息進行辯解或忽略。"
+                    },
+                    {
+                        id: "game10-2",
+                        title: "小遊戲二：不確定性挑戰",
+                        question: "面對一個結果未知的項目，你會更傾向於？",
+                        options: [
+                            { text: "A. 盡力搜集信息，制定多種預案，並接受可能的風險。", value: "A", correct: true },
+                            { text: "B. 因為不確定性太高而感到焦慮，盡量迴避。", value: "B", correct: false },
+                            { text: "C. 尋求「權威」的預測來消除不確定感。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是更積極和健康的應對方式。學會擁抱和管理不確定性，而不是試圖完全消除它，是成熟的表現。",
+                        feedbackIncorrect: "提升對不確定性的容忍度，並專注於可控因素（如A選項的行動），是應對未知挑戰的有效策略。B和C則反映了對不確定性的迴避或不健康依賴。"
+                    },
+                    {
+                        id: "game10-3",
+                        title: "小遊戲三：我的「能力圈」",
+                        question: "思考一下，你有哪些可以透過自身努力來提升的技能或特質，從而更好地應對生活挑戰？（例如：學習能力、溝通技巧、情緒管理）",
+                        options: [
+                            { text: "A. 我有很多可以提升的方面，並願意努力。", value: "A", correct: true },
+                            { text: "B. 我覺得我的能力已經固定了。", value: "B", correct: false },
+                            { text: "C. 我主要依賴運氣。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是積極的成長型思維。相信能力可以透過努力提升（自我效能），是建立內在控制感的關鍵。",
+                        feedbackIncorrect: "建立內在控制感和自我效能，意味著相信自己可以透過努力和學習來影響結果，而不是完全依賴外部因素或固定的能力。"
+                    },
+                    {
+                        id: "game10-4",
+                        title: "小遊戲四：我的「支持網」",
+                        question: "當你遇到困難時，除了求神問卜，你是否會主動向家人、朋友或專業人士（如心理諮詢師）尋求實質性的幫助和情感支持？",
+                        options: [
+                            { text: "A. 是的，我會積極尋求多方面的支持。", value: "A", correct: true },
+                            { text: "B. 我習慣自己扛，不麻煩別人。", value: "B", correct: false },
+                            { text: "C. 我主要依賴算命的指引。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是健康的應對方式。建立並運用真實的社會支持網絡，對於應對壓力和困境至關重要。",
+                        feedbackIncorrect: "尋求真實的社會支持（家人、朋友、專業人士）是應對困境的健康且有效的方式。過度依賴算命則可能錯失更實際的幫助。"
+                    },
+                    {
+                        id: "game10-5",
+                        title: "小遊戲五：做自己的「人生設計師」",
+                        question: "對於未來，你更傾向於？",
+                        options: [
+                            { text: "A. 積極規劃目標，並為之努力，同時接受路上的不確定性。", value: "A", correct: true },
+                            { text: "B. 等待「命運」的安排，相信一切自有定數。", value: "B", correct: false },
+                            { text: "C. 頻繁算命，希望從中找到未來的「劇本」。", value: "C", correct: false }
+                        ],
+                        feedbackCorrect: "A是成為自己人生「掌舵人」的態度。理性規劃、積極行動，並擁抱過程中的變化，這才是掌握人生的真諦。",
+                        feedbackIncorrect: "理性看待算命，將其視為一種參考而非圭臬，更重要的是培養獨立思考、積極規劃和為自己人生負責的能力（如A選項）。"
+                    }
+                ]
+            }
+        ];
+
+        const tabButtonsContainer = document.querySelector('.tab-buttons-container nav');
+        const tabContentContainer = document.getElementById('tab-content-container');
+        let activeTabId = tabsData[0].id;
+
+        function renderTabs() {
+            // 清空現有內容
+            tabButtonsContainer.innerHTML = '';
+            tabContentContainer.innerHTML = '';
+
+            tabsData.forEach((tab, index) => {
+                // 創建 Tab 按鈕
+                const button = document.createElement('button');
+                button.className = `tab-button py-3 px-4 md:px-6 text-sm md:text-base font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap`;
+                button.textContent = tab.title;
+                button.setAttribute('role', 'tab');
+                button.setAttribute('aria-controls', tab.id);
+                if (tab.id === activeTabId) {
+                    button.classList.add('active');
+                    button.setAttribute('aria-selected', 'true');
+                } else {
+                    button.setAttribute('aria-selected', 'false');
+                }
+                button.onclick = () => changeTab(tab.id);
+                tabButtonsContainer.appendChild(button);
+
+                // 創建 Tab 內容區域
+                const contentDiv = document.createElement('div');
+                contentDiv.id = tab.id;
+                contentDiv.className = 'tab-content p-1 md:p-5';
+                if (tab.id === activeTabId) {
+                    contentDiv.classList.add('active');
+                }
+                contentDiv.setAttribute('role', 'tabpanel');
+                contentDiv.setAttribute('aria-labelledby', `btn-${tab.id}`); // 假設按鈕有個ID
+
+                // 添加情境描述
+                const scenarioP = document.createElement('p');
+                scenarioP.className = 'text-lg text-gray-700 mb-6 p-4 bg-indigo-50 rounded-lg shadow';
+                scenarioP.textContent = tab.scenario;
+                contentDiv.appendChild(scenarioP);
+                
+                // 添加卡片式步驟
+                const stepsTitle = document.createElement('h2');
+                stepsTitle.className = 'text-2xl font-semibold text-gray-700 mb-4 mt-8';
+                stepsTitle.textContent = '卡片式步驟解析';
+                contentDiv.appendChild(stepsTitle);
+
+                tab.steps.forEach(step => {
+                    const stepCard = document.createElement('div');
+                    stepCard.className = 'card';
+                    
+                    const stepTitle = document.createElement('h3');
+                    stepTitle.className = 'text-xl font-semibold text-indigo-600 mb-2';
+                    stepTitle.textContent = step.title;
+                    stepCard.appendChild(stepTitle);
+                    
+                    const stepContent = document.createElement('p');
+                    stepContent.className = 'text-gray-600 leading-relaxed';
+                    stepContent.textContent = step.content;
+                    stepCard.appendChild(stepContent);
+
+                    if (step.citation) {
+                        const citationP = document.createElement('p');
+                        citationP.className = 'citation';
+                        citationP.textContent = step.citation;
+                        stepCard.appendChild(citationP);
+                    }
+                    contentDiv.appendChild(stepCard);
+                });
+
+                // 添加互動式小遊戲
+                const gamesTitle = document.createElement('h2');
+                gamesTitle.className = 'text-2xl font-semibold text-gray-700 mb-4 mt-10';
+                gamesTitle.textContent = '互動小遊戲';
+                contentDiv.appendChild(gamesTitle);
+
+                tab.games.forEach(game => {
+                    const gameCard = document.createElement('div');
+                    gameCard.className = 'card game-card';
+                    gameCard.id = game.id;
+
+                    const gameTitle = document.createElement('h3');
+                    gameTitle.className = 'text-lg font-semibold text-indigo-700 mb-2';
+                    gameTitle.textContent = game.title;
+                    gameCard.appendChild(gameTitle);
+
+                    const gameQuestion = document.createElement('p');
+                    gameQuestion.className = 'text-gray-700 mb-3';
+                    gameQuestion.textContent = game.question;
+                    gameCard.appendChild(gameQuestion);
+
+                    const optionsContainer = document.createElement('div');
+                    optionsContainer.className = 'space-y-2 md:space-y-0 md:space-x-2 flex flex-col md:flex-row md:flex-wrap';
+                    game.options.forEach(option => {
+                        const optionButton = document.createElement('button');
+                        optionButton.className = 'game-option flex-grow';
+                        optionButton.textContent = option.text;
+                        optionButton.onclick = () => showFeedback(game.id, option.correct, game.feedbackCorrect, game.feedbackIncorrect);
+                        optionsContainer.appendChild(optionButton);
+                    });
+                    gameCard.appendChild(optionsContainer);
+
+                    const feedbackDiv = document.createElement('div');
+                    feedbackDiv.className = 'feedback';
+                    feedbackDiv.id = `feedback-${game.id}`;
+                    gameCard.appendChild(feedbackDiv);
+                    
+                    contentDiv.appendChild(gameCard);
+                });
+
+                tabContentContainer.appendChild(contentDiv);
+            });
+        }
+
+        function changeTab(tabId) {
+            activeTabId = tabId;
+            renderTabs(); // 重新渲染以更新 active 狀態
+        }
+
+        function showFeedback(gameId, isCorrect, correctMsg, incorrectMsg) {
+            const feedbackEl = document.getElementById(`feedback-${gameId}`);
+            if (isCorrect) {
+                feedbackEl.textContent = correctMsg;
+                feedbackEl.className = 'feedback correct'; // 使用綠色表示正確或預期答案
+            } else {
+                feedbackEl.textContent = incorrectMsg;
+                feedbackEl.className = 'feedback info'; // 使用藍色表示提示信息或另一種解釋
+            }
+        }
+
+        // 初始化頁面
+        renderTabs();
+
+    </script>
+</body>
+</html>
+
